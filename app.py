@@ -283,10 +283,26 @@ st.markdown(
     """
     <style>
     div[data-testid="stMetric"] {
-        background-color: #f8f9fb;
-        border: 1px solid #dfe3e8;
-        border-radius: 8px;
-        padding: 12px 8px;
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 14px 10px;
+        color: #111827;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    div[data-testid="stMetric"] * {
+        color: inherit !important;
+    }
+    @media (prefers-color-scheme: dark) {
+        div[data-testid="stMetric"] {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            color: #f9fafb;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+        }
+        div[data-testid="stMetric"] * {
+            color: #f9fafb !important;
+        }
     }
     </style>
     """,
