@@ -91,9 +91,8 @@ export default function SettingsPage() {
                   {defaultAvatars.map((avatar, index) => (
                     <Avatar
                       key={index}
-                      className={`h-20 w-20 rounded-lg cursor-pointer hover:ring-2 hover:ring-primary shrink-0 ${
-                        selectedAvatar === avatar ? "ring-2 ring-primary" : ""
-                      }`}
+                      className={`h-20 w-20 rounded-lg cursor-pointer hover:ring-2 hover:ring-primary shrink-0 ${selectedAvatar === avatar ? "ring-2 ring-primary" : ""
+                        }`}
                       onClick={() => setSelectedAvatar(avatar)}
                     >
                       <AvatarImage src={avatar} alt={`Avatar ${index + 1}`} className="object-cover" />
@@ -365,8 +364,8 @@ export default function SettingsPage() {
                     <Checkbox
                       id="email-notifications"
                       defaultChecked={settings.notifications.email}
-                      onChange={(e) =>
-                        updateNotificationSettings({ ...settings.notifications, email: e.target.checked })
+                      onCheckedChange={(checked) =>
+                        updateNotificationSettings({ ...settings.notifications, email: checked as boolean })
                       }
                     />
                     <Label htmlFor="email-notifications">Email Notifications</Label>
@@ -375,8 +374,8 @@ export default function SettingsPage() {
                     <Checkbox
                       id="push-notifications"
                       defaultChecked={settings.notifications.push}
-                      onChange={(e) =>
-                        updateNotificationSettings({ ...settings.notifications, push: e.target.checked })
+                      onCheckedChange={(checked) =>
+                        updateNotificationSettings({ ...settings.notifications, push: checked as boolean })
                       }
                     />
                     <Label htmlFor="push-notifications">Push Notifications</Label>
@@ -385,7 +384,9 @@ export default function SettingsPage() {
                     <Checkbox
                       id="sms-notifications"
                       defaultChecked={settings.notifications.sms}
-                      onChange={(e) => updateNotificationSettings({ ...settings.notifications, sms: e.target.checked })}
+                      onCheckedChange={(checked) =>
+                        updateNotificationSettings({ ...settings.notifications, sms: checked as boolean })
+                      }
                     />
                     <Label htmlFor="sms-notifications">SMS Notifications</Label>
                   </div>
@@ -396,8 +397,8 @@ export default function SettingsPage() {
                     <Checkbox
                       id="account-activity"
                       defaultChecked={settings.notifications.accountActivity}
-                      onChange={(e) =>
-                        updateNotificationSettings({ ...settings.notifications, accountActivity: e.target.checked })
+                      onCheckedChange={(checked) =>
+                        updateNotificationSettings({ ...settings.notifications, accountActivity: checked as boolean })
                       }
                     />
                     <Label htmlFor="account-activity">Account Activity</Label>
@@ -406,8 +407,8 @@ export default function SettingsPage() {
                     <Checkbox
                       id="new-features"
                       defaultChecked={settings.notifications.newFeatures}
-                      onChange={(e) =>
-                        updateNotificationSettings({ ...settings.notifications, newFeatures: e.target.checked })
+                      onCheckedChange={(checked) =>
+                        updateNotificationSettings({ ...settings.notifications, newFeatures: checked as boolean })
                       }
                     />
                     <Label htmlFor="new-features">New Features and Updates</Label>
@@ -416,8 +417,8 @@ export default function SettingsPage() {
                     <Checkbox
                       id="marketing"
                       defaultChecked={settings.notifications.marketing}
-                      onChange={(e) =>
-                        updateNotificationSettings({ ...settings.notifications, marketing: e.target.checked })
+                      onCheckedChange={(checked) =>
+                        updateNotificationSettings({ ...settings.notifications, marketing: checked as boolean })
                       }
                     />
                     <Label htmlFor="marketing">Marketing and Promotions</Label>
@@ -473,8 +474,8 @@ export default function SettingsPage() {
                       <Switch
                         id="analytics-sharing"
                         checked={settings.privacy.analyticsSharing}
-                        onChange={(e) =>
-                          updatePrivacySettings({ ...settings.privacy, analyticsSharing: e.target.checked })
+                        onCheckedChange={(checked) =>
+                          updatePrivacySettings({ ...settings.privacy, analyticsSharing: checked })
                         }
                       />
                     </div>
@@ -483,8 +484,8 @@ export default function SettingsPage() {
                       <Switch
                         id="personalized-ads"
                         checked={settings.privacy.personalizedAds}
-                        onChange={(e) =>
-                          updatePrivacySettings({ ...settings.privacy, personalizedAds: e.target.checked })
+                        onCheckedChange={(checked) =>
+                          updatePrivacySettings({ ...settings.privacy, personalizedAds: checked })
                         }
                       />
                     </div>
