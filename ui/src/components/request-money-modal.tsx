@@ -10,7 +10,13 @@ import { CheckCircle2 } from "lucide-react"
 
 const steps = ["Select Contact", "Enter Amount", "OTP Verification", "Confirmation"]
 
-const contacts = [
+interface Contact {
+  id: string
+  name: string
+  phoneNumber: string
+}
+
+const contacts: Contact[] = [
   { id: "1", name: "John Doe", phoneNumber: "+1 234 567 8901" },
   { id: "2", name: "Jane Smith", phoneNumber: "+1 987 654 3210" },
   { id: "3", name: "Alice Johnson", phoneNumber: "+1 555 123 4567" },
@@ -19,12 +25,12 @@ const contacts = [
 interface RequestMoneyModalProps {
   isOpen: boolean
   onClose: () => void
-  onRequestMoney: (amount: number, contact: any) => void
+  onRequestMoney: (amount: number, contact: Contact) => void
 }
 
 export function RequestMoneyModal({ isOpen, onClose, onRequestMoney }: RequestMoneyModalProps) {
   const [currentStep, setCurrentStep] = useState(0)
-  const [selectedContact, setSelectedContact] = useState(null)
+  const [selectedContact, setSelectedContact] = useState<Contact | null>(null)
   const [amount, setAmount] = useState("")
   const [otp, setOtp] = useState("")
 
@@ -32,8 +38,10 @@ export function RequestMoneyModal({ isOpen, onClose, onRequestMoney }: RequestMo
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1)
     } else {
-      onRequestMoney(Number.parseFloat(amount), selectedContact)
-      onClose()
+      if (selectedContact) {
+        onRequestMoney(Number.parseFloat(amount), selectedContact)
+        onClose()
+      }
     }
   }
 
@@ -43,7 +51,7 @@ export function RequestMoneyModal({ isOpen, onClose, onRequestMoney }: RequestMo
         return (
           <div className="space-y-4">
             <Label htmlFor="contact">Select Contact</Label>
-            <Select onValueChange={(value) => setSelectedContact(contacts.find((c) => c.id === value))}>
+            <Select onValueChange={(value) => setSelectedContact(contacts.find((c) => c.id === value) || null)}>
               <SelectTrigger id="contact">
                 <SelectValue placeholder="Select a contact" />
               </SelectTrigger>
@@ -91,7 +99,7 @@ export function RequestMoneyModal({ isOpen, onClose, onRequestMoney }: RequestMo
             <CheckCircle2 className="mx-auto h-12 w-12 text-green-500" />
             <p className="text-lg font-medium">Money Request Sent</p>
             <p className="text-sm text-muted-foreground">
-              ${amount} has been requested from {selectedContact.name}.
+              ${amount} has been requested from {selectedContact?.name}.
             </p>
           </div>
         )
