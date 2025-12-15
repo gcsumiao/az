@@ -2,3 +2,28 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Local raw data (do not commit)
+Innova-AZ FY*.xlsx
+Product_Full_List.xlsx
+Fee_Code_List.xlsx
+category_mapping.csv
+billback_reason_mapping.csv
+
+# Snapshot outputs (commit only if approved)
+ui/public/data/*.json
+
+# Frontend & General
+node_modules/
+.next/
+dist/
+build/
+coverage/
+.env
+.env.local
+.DS_Store
+*.log
+
+# IDE
+.vscode/
+.idea/

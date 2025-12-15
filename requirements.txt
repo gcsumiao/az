@@ -1,4 +1,6 @@
-streamlit
-pandas
 altair
+fastapi
 openpyxl
+pandas
+pydantic
+uvicorn
