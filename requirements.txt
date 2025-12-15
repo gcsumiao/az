@@ -1,6 +1,9 @@
-altair
-fastapi
-openpyxl
-pandas
-pydantic
-uvicorn
+altair==4.2.2
+fastapi==0.95.2
+openpyxl==3.1.2
+pandas==2.0.3
+pydantic==1.10.9
+uvicorn==0.22.0
+python-multipart
+scipy
+numpy
