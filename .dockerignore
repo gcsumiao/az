@@ -1,0 +1,18 @@
+.git
+.gitignore
+.vercelignore
+.env
+.venv
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Exclude Frontend from Backend Image
+ui/
+node_modules/
+
+# Exclude large data files if we want to be safe, BUT code needs them.
+# The code filters to the last 4 files. 
+# We must include the data files in the image context so they can be read.
+# So keep xlsx (or use the same whitelist logic if possible? No, dockerignore is exclusion only).
