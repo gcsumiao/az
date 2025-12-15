@@ -68,13 +68,11 @@
 
 @layer base {
   * {
-    border-color: hsl(var(--border));
-    outline-color: hsl(var(--ring) / 0.5);
+    @apply border-border;
   }
 
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+    @apply bg-background text-foreground;
   }
 }
 
