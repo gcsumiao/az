@@ -1,5 +1,11 @@
-# Include all Excel data files (User request)
-# Innova-AZ FY*.xlsx are NOT ignored
+# Exclude heavy data files from Vercel deployment (Limit to latest 4 weeks)
+Innova-AZ FY*.xlsx
+
+# Include only latest 4 weeks
+!Innova-AZ FY26FW13.xlsx
+!Innova-AZ FY26FW12.xlsx
+!Innova-AZ FY26FW10.xlsx
+!Innova-AZ FY26FW09.xlsx
 
 # Exclude unnecessary system files
 .venv

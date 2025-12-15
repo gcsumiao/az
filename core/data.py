@@ -48,7 +48,9 @@ SALES_COLUMNS = {
 
 
 def get_source_files() -> List[Path]:
-    return sorted(DATA_DIR.glob(FILE_GLOB))
+    all_files = sorted(DATA_DIR.glob(FILE_GLOB))
+    # Limit to latest 4 weeks to prevent Vercel memory/timeout errors
+    return all_files[-4:]
 
 
 def file_signature(files: List[Path]) -> Tuple[Tuple[str, float], ...]:
