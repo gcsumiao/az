@@ -16,7 +16,13 @@ const contacts = [
   { id: "3", name: "Alice Johnson", phoneNumber: "+1 555 123 4567" },
 ]
 
-export function RequestMoneyModal({ isOpen, onClose, onRequestMoney }) {
+interface RequestMoneyModalProps {
+  isOpen: boolean
+  onClose: () => void
+  onRequestMoney: (amount: number, contact: any) => void
+}
+
+export function RequestMoneyModal({ isOpen, onClose, onRequestMoney }: RequestMoneyModalProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [selectedContact, setSelectedContact] = useState(null)
   const [amount, setAmount] = useState("")
