@@ -22,7 +22,7 @@ export function AccountsOverview() {
 
   const totalBalance = accounts.reduce((sum, account) => sum + account.balance, 0)
 
-  const handleAddMoney = (amount) => {
+  const handleAddMoney = (amount: number) => {
     setAccounts(
       accounts.map((account) =>
         account.name === "Checking" ? { ...account, balance: account.balance + amount } : account,
@@ -30,7 +30,7 @@ export function AccountsOverview() {
     )
   }
 
-  const handleSendMoney = (amount, fromAccount) => {
+  const handleSendMoney = (amount: number, fromAccount: string) => {
     setAccounts(
       accounts.map((account) =>
         account.name === fromAccount ? { ...account, balance: account.balance - amount } : account,
@@ -38,7 +38,7 @@ export function AccountsOverview() {
     )
   }
 
-  const handleRequestMoney = (amount, contact) => {
+  const handleRequestMoney = (amount: number, contact: any) => {
     console.log(`Requested $${amount} from ${contact.name}`)
   }
 
