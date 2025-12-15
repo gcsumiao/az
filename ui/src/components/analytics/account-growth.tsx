@@ -16,7 +16,15 @@ const data = [
 export function AccountGrowth() {
   const { theme } = useTheme()
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({
+    active,
+    payload,
+    label,
+  }: {
+    active?: boolean
+    payload?: any[]
+    label?: string | number
+  }) => {
     if (active && payload && payload.length) {
       return (
         <Card className="border-none shadow-lg">
