@@ -12,7 +12,12 @@
     "routes": [
         {
             "src": "/api/(.*)",
-            "dest": "/api/index.py"
+            "dest": "/api/index.py",
+            "config": {
+                "maxLambdaSize": "15mb",
+                "memory": 3008,
+                "maxDuration": 60
+            }
         },
         {
             "src": "/(.*)",
@@ -20,3 +25,4 @@
         }
     ]
 }
+```
