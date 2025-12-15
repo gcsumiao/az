@@ -25,7 +25,7 @@ export function NotificationsTab() {
     user: false,
   })
 
-  const toggleNotification = (id) => {
+  const toggleNotification = (id: keyof typeof notifications) => {
     setNotifications((prev) => ({ ...prev, [id]: !prev[id] }))
   }
 
@@ -42,7 +42,10 @@ export function NotificationsTab() {
                 <type.icon className="h-5 w-5 text-muted-foreground" />
                 <span className="text-sm font-medium">{type.label}</span>
               </div>
-              <Switch checked={notifications[type.id]} onCheckedChange={() => toggleNotification(type.id)} />
+              <Switch
+                checked={notifications[type.id as keyof typeof notifications]}
+                onCheckedChange={() => toggleNotification(type.id as keyof typeof notifications)}
+              />
             </div>
           ))}
         </CardContent>

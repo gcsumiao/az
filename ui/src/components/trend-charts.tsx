@@ -35,7 +35,7 @@ export function TrendCharts() {
           <p className="text-sm text-muted-foreground">Weekly revenue trend (imported weeks)</p>
         </CardHeader>
         <CardContent>
-          <VegaChart spec={(data?.charts as any)?.revenue_trend} className="w-full" />
+          <VegaChart spec={data?.charts?.["revenue_trend"]} className="w-full" />
         </CardContent>
       </Card>
 
@@ -45,7 +45,7 @@ export function TrendCharts() {
           <p className="text-sm text-muted-foreground">Weekly units trend (imported weeks)</p>
         </CardHeader>
         <CardContent>
-          <VegaChart spec={(data?.charts as any)?.units_trend} className="w-full" />
+          <VegaChart spec={data?.charts?.["units_trend"]} className="w-full" />
         </CardContent>
       </Card>
     </div>

@@ -84,7 +84,7 @@ export function ReportsTab() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {dummyReportData[selectedReport]?.map((row) => (
+              {dummyReportData[selectedReport as keyof typeof dummyReportData]?.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell>{row.metric}</TableCell>
                   <TableCell>{row.value}</TableCell>

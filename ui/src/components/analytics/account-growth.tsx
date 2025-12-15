@@ -13,31 +13,31 @@ const data = [
   { month: "Jun", newAccounts: 220, totalAccounts: 1870 },
 ]
 
-export function AccountGrowth() {
-  const { theme } = useTheme()
-
-  const CustomTooltip = ({
-    active,
-    payload,
-    label,
-  }: {
-    active?: boolean
-    payload?: any[]
-    label?: string | number
-  }) => {
-    if (active && payload && payload.length) {
-      return (
-        <Card className="border-none shadow-lg">
-          <CardContent className="p-2">
-            <p className="text-sm font-semibold">{label}</p>
-            <p className="text-sm text-muted-foreground">New Accounts: {payload[0].value}</p>
-            <p className="text-sm text-muted-foreground">Total Accounts: {payload[1].value}</p>
-          </CardContent>
-        </Card>
-      )
-    }
-    return null
+const CustomTooltip = ({
+  active,
+  payload,
+  label,
+}: {
+  active?: boolean
+  payload?: any[]
+  label?: string | number
+}) => {
+  if (active && payload && payload.length) {
+    return (
+      <Card className="border-none shadow-lg">
+        <CardContent className="p-2">
+          <p className="text-sm font-semibold">{label}</p>
+          <p className="text-sm text-muted-foreground">New Accounts: {payload[0].value}</p>
+          <p className="text-sm text-muted-foreground">Total Accounts: {payload[1].value}</p>
+        </CardContent>
+      </Card>
+    )
   }
+  return null
+}
+
+export function AccountGrowth({ comparisonPeriod }: { comparisonPeriod?: string }) {
+  const { theme } = useTheme()
 
   return (
     <ResponsiveContainer width="100%" height={350}>

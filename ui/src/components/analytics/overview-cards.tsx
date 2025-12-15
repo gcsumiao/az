@@ -32,7 +32,7 @@ const cards = [
   },
 ]
 
-export function OverviewCards() {
+export function OverviewCards({ comparisonPeriod }: { comparisonPeriod?: string }) {
   return (
     <>
       {cards.map((card) => (

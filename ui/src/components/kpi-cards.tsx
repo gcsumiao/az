@@ -108,19 +108,25 @@ export function KpiCards() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {kpi.format === "percent"
-                  ? kpi.value === null
-                    ? "N/A"
-                    : `${(Number(kpi.value) * 100).toFixed(1)}%`
-                  : kpi.label.includes("Revenue") || kpi.label.includes("Margin")
-                    ? formatCurrency0(kpi.value)
-                    : kpi.label === "Avg Selling Price"
-                      ? kpi.value === null
-                        ? "N/A"
-                        : `$${Number(kpi.value).toFixed(2)}`
-                      : kpi.value === null
-                        ? "N/A"
-                        : kpi.value.toLocaleString()}
+                {(kpi.label === "Top GM Product" || kpi.label === "Top GM Category") ? (
+                  <span className="text-lg md:text-xl truncate block" title={kpi.helper || ""}>
+                    {kpi.helper}
+                  </span>
+                ) : (
+                  kpi.format === "percent"
+                    ? kpi.value === null
+                      ? "N/A"
+                      : `${(Number(kpi.value) * 100).toFixed(1)}%`
+                    : kpi.label.includes("Revenue") || kpi.label.includes("Margin")
+                      ? formatCurrency0(kpi.value)
+                      : kpi.label === "Avg Selling Price"
+                        ? kpi.value === null
+                          ? "N/A"
+                          : `$${Number(kpi.value).toFixed(2)}`
+                        : kpi.value === null
+                          ? "N/A"
+                          : kpi.value.toLocaleString()
+                )}
               </div>
               <div className="flex flex-col gap-0.5 mt-1">
                 {showTrend && (
@@ -141,7 +147,13 @@ export function KpiCards() {
                     </span>
                   </div>
                 )}
-                {kpi.helper && <span className="text-xs text-muted-foreground">{kpi.helper}</span>}
+                {(kpi.label === "Top GM Product" || kpi.label === "Top GM Category") ? (
+                  <span className="text-sm font-medium text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/30 px-2 py-0.5 rounded-full w-fit">
+                    {formatCurrency0(kpi.value)}
+                  </span>
+                ) : (
+                  kpi.helper && <span className="text-xs text-muted-foreground">{kpi.helper}</span>
+                )}
                 {kpi.subtext && <span className="text-[10px] text-muted-foreground truncate max-w-[180px]" title={kpi.subtext}>{kpi.subtext}</span>}
               </div>
             </CardContent>

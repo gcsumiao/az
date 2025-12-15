@@ -12,11 +12,18 @@ const initialBills = [
   { id: 4, name: "Water Bill", amount: 45, dueDate: "2023-07-30" },
 ]
 
-export function QuickBillPay() {
-  const [bills, setBills] = useState(initialBills)
-  const [selectedBill, setSelectedBill] = useState(null)
+interface Bill {
+  id: number
+  name: string
+  amount: number
+  dueDate: string
+}
 
-  const handlePaymentSuccess = (paidBillId) => {
+export function QuickBillPay() {
+  const [bills, setBills] = useState<Bill[]>(initialBills)
+  const [selectedBill, setSelectedBill] = useState<Bill | null>(null)
+
+  const handlePaymentSuccess = (paidBillId: number) => {
     setBills(bills.filter((bill) => bill.id !== paidBillId))
     setSelectedBill(null)
   }
