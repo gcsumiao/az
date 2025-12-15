@@ -2,7 +2,5 @@
 
 ## Deployment Status
 - **Vercel**: Active
-- **Fixes Applied**: 
-  - API Root Path
-  - Memory Optimization (3GB)
-  - Full Data Inclusion
+- **Optimization**: Restricted to Latest 4 Weeks (FW09-FW13) to prevent Timeout.
+- **Last Update**: Trigger Deployment (Force 4-Week Limit)
