@@ -39,6 +39,11 @@ def compute_overview(filters: DashboardFilters, ctx: Dict[str, Any]) -> Dict[str
     filtered_cost: pd.DataFrame = ctx.get("filtered_cost", pd.DataFrame())
     alerts = ctx.get("alerts", []) or []
 
+    latest_year, snapshot_week, prev_week = get_snapshot_context(gt_df)
+    
+    # Calculate Range Revenue (Grand Total) early for GM% denominator
+    range_revenue = float(gt_df[gt_df["fiscal_year"] == latest_year]["fw_revenue_total"].sum()) if latest_year is not None and not gt_df.empty else 0.0
+
     desc_map = None
     if not sales_df.empty and {"part_number", "description"}.issubset(sales_df.columns):
         tmp = sales_df.dropna(subset=["part_number"]).copy()
@@ -61,7 +66,11 @@ def compute_overview(filters: DashboardFilters, ctx: Dict[str, Any]) -> Dict[str
         summary = margin.agg({"revenue": "sum", "gross_margin": "sum"})
         total_rev = float(summary.get("revenue", 0) or 0)
         total_gm = float(summary.get("gross_margin", 0) or 0)
-        gm_pct = (total_gm / total_rev) if total_rev else None
+        
+        # User Logic: GM% = Total GM / FY Range Revenue (Grand Total)
+        # Fallback to total_rev (SKU sum) if range_revenue (Grand Total) is missing or zero
+        denominator = range_revenue if range_revenue > 0 else total_rev
+        gm_pct = (total_gm / denominator) if denominator else None
 
         top_prod = None
         prod_group = (
@@ -109,7 +118,6 @@ def compute_overview(filters: DashboardFilters, ctx: Dict[str, Any]) -> Dict[str
             "top_category": top_cat,
         }
 
-    latest_year, snapshot_week, prev_week = get_snapshot_context(gt_df)
     snap = (
         gt_df[(gt_df["fiscal_year"] == latest_year) & (gt_df["fiscal_week"] == snapshot_week)]
         if snapshot_week is not None and latest_year is not None
@@ -129,9 +137,8 @@ def compute_overview(filters: DashboardFilters, ctx: Dict[str, Any]) -> Dict[str
     units_wow = (units - prev_units) / prev_units if units is not None and prev_units not in (None, 0) else None
     revenue_wow = (revenue - prev_revenue) / prev_revenue if revenue is not None and prev_revenue not in (None, 0) else None
     asp = revenue / units if revenue is not None and units not in (None, 0) else None
-
+    
     range_units = float(gt_df[gt_df["fiscal_year"] == latest_year]["fw_units_total"].sum()) if latest_year is not None and not gt_df.empty else None
-    range_revenue = float(gt_df[gt_df["fiscal_year"] == latest_year]["fw_revenue_total"].sum()) if latest_year is not None and not gt_df.empty else None
 
     heroes: Dict[str, Any] = {"product": {}, "category": {}}
     if snapshot_week is not None and not sales_df.empty:
