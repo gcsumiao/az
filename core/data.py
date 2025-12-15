@@ -852,6 +852,7 @@ def compute_margin(fact_sales: pd.DataFrame, cost_dim: pd.DataFrame, fiscal_week
     if fiscal_weeks and "fiscal_week" in df.columns:
         df = df[df["fiscal_week"].isin(fiscal_weeks)]
     df = df.dropna(subset=["part_number", "item_id"])
+    df = df[~df["part_number"].astype(str).str.contains("TOTAL", case=False, na=False)]
     df = df.merge(cost_dim[["part_number", "item_id", "unit_cost"]], on=["part_number", "item_id"], how="left")
     df["cogs"] = df["units"] * df["unit_cost"]
     grouped = (
