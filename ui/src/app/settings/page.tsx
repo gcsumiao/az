@@ -429,7 +429,7 @@ export default function SettingsPage() {
                 <Label htmlFor="notification-frequency">Notification Frequency</Label>
                 <Select
                   value={settings.notifications.frequency}
-                  onValueChange={(value) => updateNotificationSettings({ ...settings.notifications, frequency: value })}
+                  onValueChange={(value) => updateNotificationSettings({ ...settings.notifications, frequency: value as "real-time" | "daily" | "weekly" })}
                 >
                   <SelectTrigger id="notification-frequency">
                     <SelectValue placeholder="Select Frequency" />
@@ -498,7 +498,7 @@ export default function SettingsPage() {
                   <CardContent>
                     <RadioGroup
                       value={settings.privacy.visibility}
-                      onValueChange={(value) => updatePrivacySettings({ ...settings.privacy, visibility: value })}
+                      onValueChange={(value) => updatePrivacySettings({ ...settings.privacy, visibility: value as "public" | "private" })}
                     >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="public" id="visibility-public" />
@@ -520,7 +520,7 @@ export default function SettingsPage() {
                   <CardContent>
                     <Select
                       value={settings.privacy.dataRetention}
-                      onValueChange={(value) => updatePrivacySettings({ ...settings.privacy, dataRetention: value })}
+                      onValueChange={(value) => updatePrivacySettings({ ...settings.privacy, dataRetention: value as "6-months" | "1-year" | "2-years" | "indefinite" })}
                     >
                       <SelectTrigger id="data-retention">
                         <SelectValue placeholder="Select Data Retention Period" />
