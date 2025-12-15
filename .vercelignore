@@ -1,0 +1,15 @@
+# Include all Excel data files (User request)
+# Innova-AZ FY*.xlsx are NOT ignored
+
+# Exclude unnecessary system files
+.venv
+__pycache__
+*.pyc
+.DS_Store
+.git
+.gitignore
+
+# Exclude large documentation/temp files if any
+only
+once
+needed

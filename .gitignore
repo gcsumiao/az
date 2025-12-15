@@ -27,3 +27,7 @@ coverage/
 # IDE
 .vscode/
 .idea/
+
+# Excel temporary files
+~$*
+*.tmp
