@@ -1,4 +1,11 @@
-# Include all data files (warning: can increase build size/time)
+# Exclude heavy data files from Vercel deployment (limit to latest 4 weeks)
+Innova-AZ FY*.xlsx
+
+# Include only latest 4 weeks
+!Innova-AZ FY26FW15.xlsx
+!Innova-AZ FY26FW13.xlsx
+!Innova-AZ FY26FW12.xlsx
+!Innova-AZ FY26FW10.xlsx
 
 # Exclude unnecessary system files
 .venv
